@@ -3,7 +3,7 @@
   "name": "io.github.pipeworx-io/bcb-br",
   "title": "Bcb Br",
   "description": "Banco Central do Brasil (Brazil's central bank) MCP.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "websiteUrl": "https://pipeworx.io/packs/bcb-br",
   "repository": {
     "url": "https://github.com/pipeworx-io/mcp-bcb-br",

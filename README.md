@@ -2,13 +2,13 @@
 
 Banco Central do Brasil (Brazil's central bank) MCP.
 
-Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1476+ live data sources.
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 1679+ live data sources.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `sgs_series` | Fetch any Banco Central do Brasil SGS time series by numeric code. Common codes: 432=Selic target, 11=Selic daily, 433=IPCA inflation, 1=USD/BRL PTAX sell, 21619=USD/BRL, 4389=CDI. Returns [{data:"dd/MM/yyyy", valor:"..."}]. Use "last" for the most recent N observations, or a date range. |
+| `sgs_series` | Fetch any Banco Central do Brasil SGS time series by numeric code. Common codes: 432=Selic target, 11=Selic daily, 433=IPCA inflation, 1=USD/BRL PTAX sell, 21619=USD/BRL, 4389=CDI. Returns {series_code, series_name, country:"Brazil", statement, count, observations:[{data:"dd/MM/yyyy", valor:"..."}]}. Use "last" for the most recent N observations, or a date range. |
 | `indicator` | Convenience lookup for common Brazilian macro indicators by friendly name (no SGS code needed). names: selic_target, selic_daily, ipca, usd_brl_ptax, usd_brl, cdi. Returns the latest N observations with the series label and unit. |
 | `list_indicators` | List the friendly indicator names available to the "indicator" tool, with their SGS codes and units. |
 | `ptax_usd` | Official PTAX USD/BRL quote for a specific business day (buy + sell rate, timestamp). Returns {cotacaoCompra, cotacaoVenda, dataHoraCotacao}. Quotes are not published on weekends/holidays. |
@@ -58,9 +58,45 @@ directly, instead of just this one's:
 }
 ```
 
-Both URLs reach the same gateway and the same 1476+ data sources. The
+Both URLs reach the same gateway and the same 1679+ data sources. The
 only difference is which pack's tools are listed **directly**; `ask_pipeworx`
 reaches all of them from either one.
+
+## No MCP client? Call it over HTTP
+
+```bash
+curl -X POST https://gateway.pipeworx.io/v1/tools/sgs_series \
+  -H 'Content-Type: application/json' \
+  -d '{"code":432,"last":12}'
+```
+
+No account needed for the first calls. Inspect any tool: `GET https://gateway.pipeworx.io/v1/tools/sgs_series`. Find one: `POST https://gateway.pipeworx.io/v1/tools/search_packs` with `{"query":"..."}`.
+
+## Standalone (no gateway account)
+
+This package also runs as a local stdio MCP server — no Pipeworx account, no
+gateway round-trip:
+
+```json
+{
+  "mcpServers": {
+    "bcb-br": {
+      "command": "npx",
+      "args": ["-y", "@pipeworx/mcp-bcb-br"]
+    }
+  }
+}
+```
+
+Or run it directly to confirm it starts:
+
+```bash
+npx -y @pipeworx/mcp-bcb-br
+```
+
+It speaks MCP over stdin/stdout and answers `initialize`/`tools/list`/`tools/call`
+for **only** this pack's tools — none of the shared meta-tools the gateway
+connection above adds. Same source, same tools, no ask_pipeworx routing.
 
 ## Using with ask_pipeworx
 
@@ -81,13 +117,3 @@ The gateway picks the right tool and fills the arguments automatically.
 ## License
 
 MIT
-
-## No MCP client? Call it over HTTP
-
-```bash
-curl -X POST https://gateway.pipeworx.io/v1/tools/sgs_series \
-  -H 'Content-Type: application/json' \
-  -d '{"code":432,"last":12}'
-```
-
-No account needed for the first calls. Inspect any tool: `GET https://gateway.pipeworx.io/v1/tools/sgs_series`. Find one: `POST https://gateway.pipeworx.io/v1/tools/search_packs` with `{"query":"..."}`.
