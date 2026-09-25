@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-bcb-br",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Banco Central do Brasil (Brazil's central bank) MCP.",
   "type": "module",
   "main": "src/index.ts",
@@ -26,7 +26,7 @@
     "@cloudflare/workers-types": "^4.20260405.1"
   },
   "pipeworx": {
-    "sourceHash": "v1-26e9c1d8da981bd8e8e367f0f4cbb3c681b70eea7be651c3e68c20fccbaef141",
-    "sourceCommit": "60f04b68c347e970c6be94a53439d1364061fc06"
+    "sourceHash": "v1-95395f4c85afa60af28cfc14d54fcc5018e214c9b97f8ca12238ad2c87a1694f",
+    "sourceCommit": "454041882179fae560c06e770b6b7a2f33970015"
   }
 }
