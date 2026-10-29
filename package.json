@@ -1,12 +1,20 @@
 {
   "name": "@pipeworx/mcp-bcb-br",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Banco Central do Brasil (Brazil's central bank) MCP. Keyless public APIs: SGS time series + Olinda OData (PTAX FX, Focus expectations).",
   "type": "module",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./tools.json": "./tools.json",
+    "./package.json": "./package.json"
+  },
   "bin": {
     "mcp-bcb-br": "bin/cli.js"
+  },
+  "files": ["bin/", "lib/", "tools.json", "server.json"],
+  "engines": {
+    "node": ">=18"
   },
   "keywords": ["mcp", "mcp-server", "model-context-protocol", "pipeworx", "bcb-br"],
   "license": "MIT",
@@ -14,19 +22,12 @@
     "type": "git",
     "url": "git+https://github.com/pipeworx-io/mcp-bcb-br.git"
   },
-  "scripts": {
-    "typecheck": "tsc --noEmit"
-  },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.0",
-    "tsx": "^4.19.0"
-  },
-  "devDependencies": {
-    "typescript": "^5.9.3",
-    "@cloudflare/workers-types": "^4.20260405.1"
-  },
+  "mcpName": "io.github.pipeworx-io/bcb-br",
   "pipeworx": {
-    "sourceHash": "v1-d9f141e07dcbb86991945de8cf370f3d6116ad8f933cb1afd7fc4dfc1bc359b4",
-    "sourceCommit": "70a4e816a9195016cd4af92dca2019485d4c3865"
+    "mode": "gateway",
+    "slug": "bcb-br",
+    "gatewaySlug": "bcb-br",
+    "sourceHash": "v1-01a059240fb60161227d73e715bf1c4e4e69f553d70c8a38b239d9ee9999dd3c",
+    "sourceCommit": "4277282d72f9bf55e548b3799aaf737baf22152f"
   }
 }
