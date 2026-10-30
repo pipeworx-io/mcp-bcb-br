@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-bcb-br",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Banco Central do Brasil (Brazil's central bank) MCP. Keyless public APIs: SGS time series + Olinda OData (PTAX FX, Focus expectations).",
   "type": "module",
   "main": "lib/index.js",
@@ -27,7 +27,7 @@
     "mode": "gateway",
     "slug": "bcb-br",
     "gatewaySlug": "bcb-br",
-    "sourceHash": "v1-01a059240fb60161227d73e715bf1c4e4e69f553d70c8a38b239d9ee9999dd3c",
-    "sourceCommit": "4277282d72f9bf55e548b3799aaf737baf22152f"
+    "sourceHash": "v1-dfd77db115aceccbde97c074175db6136a5d40991668f06eb571735d97e9bc68",
+    "sourceCommit": "5cb09714e895571153f3d9663c36ff0f140cadd6"
   }
 }
